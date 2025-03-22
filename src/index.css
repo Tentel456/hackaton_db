@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/30 backdrop-blur border border-white/20;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-[1.01];
+  }
+}
+
+@layer utilities {
+  .gradient-animate {
+    background-size: 200% 200%;
+    animation: gradientAnimation 15s ease infinite;
+  }
+  
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+/* Bottom Navigation Animation */
+.bottom-nav-appear {
+  transform: translateY(100%);
+}
+
+.bottom-nav-appear-active {
+  transform: translateY(0);
+  transition: transform 300ms ease-in;
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
