@@ -13,21 +13,21 @@ import {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 
-// Проверка, работает ли сервер
+
 app.get('/api/status', (req, res) => {
   res.json({ status: 'online', message: 'Сервер работает корректно' });
 });
 
-// Для обратной совместимости оставляем старый эндпоинт
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'online', message: 'Сервер работает корректно' });
 });
 
-// API для получения полного словаря
+
 app.get('/api/dictionary', (req, res) => {
   try {
     const dictionary = getAllSlangWords();
@@ -40,7 +40,7 @@ app.get('/api/dictionary', (req, res) => {
   }
 });
 
-// API для перевода текста
+
 app.post('/api/translate', (req, res) => {
   const { text, mode = 'replace' } = req.body;
   
@@ -69,7 +69,7 @@ app.post('/api/translate', (req, res) => {
   }
 });
 
-// API для автодополнения и поиска слов
+
 app.get('/api/suggestions', (req, res) => {
   const { query } = req.query;
   
@@ -90,7 +90,7 @@ app.get('/api/suggestions', (req, res) => {
   }
 });
 
-// Поиск сленговых слов по запросу
+
 app.get('/api/search', (req, res) => {
   const { query } = req.query;
   
@@ -102,7 +102,7 @@ app.get('/api/search', (req, res) => {
   res.json(suggestions);
 });
 
-// Проверка, является ли слово сленговым
+
 app.get('/api/check', (req, res) => {
   const { word } = req.query;
   
@@ -116,7 +116,7 @@ app.get('/api/check', (req, res) => {
   res.json({ isSlang, explanation });
 });
 
-// Поиск конкретного слова (точное совпадение + похожие)
+
 app.get('/api/word', (req, res) => {
   const { word } = req.query;
   
@@ -128,7 +128,7 @@ app.get('/api/word', (req, res) => {
   res.json(result);
 });
 
-// Запуск сервера
+
 app.listen(PORT, () => {
   console.log(`Сервер запущен на порту ${PORT}`);
   console.log(`Словарь сленгов (${Object.keys(slangDictionary).length} слов) загружен из файла slangDictionary.js`);
